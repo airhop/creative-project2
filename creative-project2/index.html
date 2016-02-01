@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://fonts.googleapis.com/css?family=Exo" 
+rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     <script src="realgame.js" id="game"></script>
+   <style> 
+
+.gameclass{
+  transition: opacity 2s;
+}
+body {
+  margin:0;
+  padding:100px 0 50px 0;
+  background-color: #58D3F5;
+}
+h2{
+font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+font-size: 50px;
+}
+#mydiv2{
+ 	font-family: 'Exo', serif;
+ 	font-size: 60px;
+	color: black;
+	text-shadow: 2px 2px black;
+}
+#submission-form{
+ 	background-color: white;
+	width:60%;
+	height: 1200px;
+	box-shadow: 1px 1px 1px 2px #888888;
+}
+	.button {
+	 margin-top: 3%;
+   	 background-color: #58D3F5;
+   	 border: none;
+   	 color: white;
+   	 padding: 15px 32px;
+    	 text-align: center;
+   	 text-decoration: none;
+   	 display: inline-block;
+    	 font-size: 16px;
+	}  
+.picture {
+  position: relative;
+  width: 220px;
+}
+ 
+.picture img {
+  border: 10px solid #fff;
+  border-bottom: 45px solid #fff;
+  -webkit-box-shadow: 3px 3px 3px 3px #777;
+     -moz-box-shadow: 3px 3px 3px 3px #777;
+          box-shadow: 3px 3px 3px 3px #777;
+}
+ 
+.picture p {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 0px;
+  font: 400 18px/1 'Kaushan Script', cursive;
+  color: #888;
+}
+#head{
+ 	font-family: 'Exo', serif;
+ 	font-size: 20px;
+	color: black;
+	text-shadow: 1px 1px black;
+}
+#input {
+    border: 2px solid white; 
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    padding: 15px;
+    background: rgba(255,255,255,0.5);
+    margin: 0 0 10px 0;
+	font-family: 'Exo', serif;
+ 	font-size: 18px;
+	color: black;
+
+}
+#in{
+font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+font-size: 20px;
+}
+#instruct{
+font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+font-size: 25px;
+}
+#scoring{
+font-family: Copperplate / Copperplate Gothic Light, sans-serif;
+font-size: 50px;
+}
+</style>
+  <title></title>
+</head>
+<body>
+  <script>
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '422432464634716',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+    
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected'){
+        getinfo();
+        setTimeout(myFunction, 1000);
+    $('#loginbutton').remove();
+      }else if (response.status === 'not_authorized') {
+        document.getElementById('mydiv').innerHTML = 'Click Login to continue';
+      }else {
+        document.getElementById('mydiv').innerHTML = 'Click Login to continue';
+      }
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function login(){
+    FB.login(function(response){
+ if (response.status === 'connected'){
+        getinfo();
+        setTimeout(myFunction, 1000);
+        $('#loginbutton').remove();
+      }else if (response.status === 'not_authorized') {
+        document.getElementById('mydiv').innerHTML = 'Click Login to continue';
+      }else {
+        document.getElementById('mydiv').innerHTML = 'Click Login to continue';
+      }
+    });
+  }
+
+function getinfo(){
+FB.api('/me', {}, function(response) {
+  var mypicture = 'https://graph.facebook.com/';
+  mypicture += response.id;
+  mypicture += "/picture?type=large";
+  $('#mydiv2').text("Hello, "+ response.name);
+  document.getElementById('picture').src = mypicture;
+ // FB.login(function(){
+  // Note: The call will only work if you accept the permission request
+ // FB.api('/me/feed', 'post', {message: 'Hey guys I\'m using this sweet app! you can check it out at http://ec2-52-26-193-255.us-west-2.compute.amazonaws.com/tests/facebook/'});
+//}, {scope: 'publish_actions'});
+});
+
+}
+function movePicture() {
+      document.getElementById('picture').height = 55;
+     
+    
+}
+function myFunction(distance) {
+    if (document.getElementById('picture').height > 200){
+        document.getElementById('picture').height -= 5 ;
+      setTimeout(myFunction, 50)
+    }
+    else{
+	var url = "http://www.jamieglowacki.com/wp-content/uploads/2015/01/LYw4POpF.jpeg"
+	$('#gamereal').css('visibility','visible');
+    }
+}
+</script>
+<center><div id="submission-form">
+<div id ="mydiv"></div>
+<center><div id ="mydiv2"></div></center>
+
+<center><div class="picture">
+  <img id="picture">
+</div></center>
+
+<center><div>
+<button class="button" id = "loginbutton" onclick = "login()">Login</button>
+</div></center>
+<br>
+<center><div id="scoring">
+</div></center>
+<div id="gamereal" style="visibility: hidden">
+<center><h2 id="game-title">Whack-a-Mole</h2></center>
+<center><div id="head">Test your skill.  How many boxes can you click in 30 seconds?</div></center>
+<form name="cpanel">
+<center>
+<table cellspacing=3>
+<tr>
+<td><input type="button" class="button" name="startstop" value=" Start Game | Stop Game " onClick="play()"></td>
+<td><pre>    </pre></td>
+<td align=right id="in">Time:</td>
+<td><input type="text" id="input" name="timeleft" size="4" onFocus="this.blur()"></td>
+</tr>
+<tr>
+<td><input type="text" id="input" name="state" size="20" value="Push Start to Play" onFocus="this.blur()"></td>
+<td><pre>    </pre></td>
+<td align=right id="in">Score:</td>
+<td><input type="text" id="input" name="score" size="4" onFocus="this.blur()"></td>
+</tr>
+</table>
+</center>
+</form>
+<form name="dmz">
+<center>
+<table cellspacing=3>
+<tr>
+<td colspan=10><hr size=1></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(0)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(1)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(2)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(3)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(4)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(5)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(6)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(7)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(8)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(9)"></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(10)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(11)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(12)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(13)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(14)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(15)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(16)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(17)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(18)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton"  onClick="hithead(19)"></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(20)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(21)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(22)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(23)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(24)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(25)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(26)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(27)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(28)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(29)"></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(30)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(31)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(32)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(33)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(34)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(35)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(36)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(37)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(38)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(39)"></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(40)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(41)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(42)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(43)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(44)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(45)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(46)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(47)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(48)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(49)"></td>
+</tr>
+<tr>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(50)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(51)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(52)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(53)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(54)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(55)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(56)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(57)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(58)"></td>
+<td align="center" valign="center"><input type="radio" id="littlebutton" onClick="hithead(59)"></td>
+</tr>
+<tr><td colspan=10><hr size=1></td>
+</tr></table></center></form>
+
+<center><table cellspacing=3><tr><td><code>
+<div id="instruct"><strong>Instructions:</strong>
+<ol id="list-nums"><li id="list-els">Click on the buttons as<BR>
+they randomly pop up.<BR>
+<li id="list-els">1 point per hit, minus 1 point per miss.<BR>
+</ol></td></tr></table></center>
+</div>
+</div></center>
+</body>
+ 
+ </html>
