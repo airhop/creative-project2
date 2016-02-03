@@ -46,6 +46,7 @@ font-size: 50px;
 .picture {
   position: relative;
   width: 220px;
+  opacity: 0;
 }
  
 .picture img {
@@ -117,6 +118,7 @@ font-size: 50px;
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected'){
         getinfo();
+         $(".picture").css("opacity", 1);
         setTimeout(myFunction, 1000);
     $('#loginbutton').remove();
       }else if (response.status === 'not_authorized') {
@@ -139,6 +141,7 @@ font-size: 50px;
     FB.login(function(response){
  if (response.status === 'connected'){
         getinfo();
+         $(".picture").css("opacity", 1);
         setTimeout(myFunction, 1000);
         $('#loginbutton').remove();
       }else if (response.status === 'not_authorized') {
@@ -169,7 +172,7 @@ function movePicture() {
     
 }
 function myFunction(distance) {
-    if (document.getElementById('picture').height > 200){
+    if (document.getElementById('picture').height > 150){
         document.getElementById('picture').height -= 5 ;
       setTimeout(myFunction, 50)
     }
@@ -195,7 +198,7 @@ function myFunction(distance) {
 </div></center>
 <div id="gamereal" style="visibility: hidden">
 <center><h2 id="game-title">Whack-a-Mole</h2></center>
-<center><div id="head">Test your poop.  How many boxes can you click in 30 seconds?</div></center>
+<center><div id="head">Test your skills.  How many boxes can you click in 30 seconds?</div></center>
 <form name="cpanel">
 <center>
 <table cellspacing=3>

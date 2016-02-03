@@ -1,4 +1,4 @@
-
+//
 gamelength=30;
 timerID=null
 var playing=false;
